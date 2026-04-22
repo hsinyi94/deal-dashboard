@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "PDF 簡轉繁",
+  "description": "手動觸發後，將使用者指定的 PDF 檔案內容從簡體中文轉換為繁體中文，產出新的 PDF 檔案。",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "使用者要將 PDF 檔案從簡體中文轉換為繁體中文。請執行以下步驟：1. 確認使用者指定了哪個 PDF 檔案，若未指定則詢問。2. 用 PyMuPDF (fitz) 讀取 PDF 中所有文字。3. 用 opencc (OpenCC) 將簡體中文轉為繁體中文（使用 s2twp 配置，含台灣慣用詞彙轉換）。4. 盡量保留原始 PDF 的排版和格式，將轉換後的文字寫回新的 PDF。5. 新檔案命名為原檔名加上 _繁體 後綴。如果 opencc 未安裝，先執行 pip install opencc-python-reimplemented。"
+  }
+}

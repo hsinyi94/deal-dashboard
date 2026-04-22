@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "name": "PDF 簡繁轉換品質檢查",
+  "description": "當編輯 PDF 簡繁轉換腳本（convert_pdf_s2t*.py, convert_mde*.py）並儲存後，自動檢查腳本是否遵循標準轉換流程，並在轉換後驗證輸出 PDF 的簡體殘留、文字重疊、字體大小一致性、超連結保留等品質問題。",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "convert_pdf_s2t*.py",
+      "convert_mde*.py",
+      "*_s2t*.py"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "PDF 簡繁轉換腳本已更新。請依照 .kiro/steering/pdf-s2t-conversion.md 的標準檢查清單驗證此腳本：\n\n1. **核心設定**：OpenCC 配置是否用 `s2twp`？輸出命名是否加 `_繁體` 後綴？\n2. **字型處理**：是否對每個 span 內部拆分 ASCII/CJK 段，ASCII 用 `helv`、CJK 用 `china-t`？\n3. **分組邏輯**：是否按「相同 fontsize 的連續 span」分組後整組處理？避免逐 span 縮放導致大小不均？\n4. **Redact 安全**：`apply_redactions` 是否加 `images=fitz.PDF_REDACT_IMAGE_NONE`？bbox 是否涵蓋整個 span？\n5. **超連結保留**：是否從原版複製所有 `page.get_links()` 到輸出檔？是否用 `incremental=True, encryption=fitz.PDF_ENCRYPT_KEEP` 保存？\n6. **檔案鎖定處理**：是否先存 .tmp 再 move？失敗時退回 `_v{N}` 後綴？\n7. **Unicode 控制台**：腳本開頭是否有 `sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')`？\n\n若腳本被執行產生新的繁體 PDF，請立刻跑品質檢查並回報：\n- 簡體殘留（全文掃描 `页与为从关发对应当时来没这进还门间们让说请问给过`）\n- 文字重疊（相鄰 span x 重疊 > 2px）\n- 連結數比對（原版 vs 繁體版）\n\n若發現問題，直接修正腳本並重新執行，不要等使用者指出。"
+  }
+}

@@ -1,0 +1,40 @@
+# --- data / large files that shouldn't be in Git ---
+*.csv
+*.xlsx
+*.msg
+
+# Original Amazon/vendor materials (keep out of public repo)
+TWGS*.pdf
+PointsDEAL*.pdf
+MDE4/
+Matched_JP_Sellers*
+02_Validation*
+
+# Large source PDFs and their working folders (only the deploy dashboard is public)
+2026日亚企业购品牌专场活动介绍-*.pdf
+2026_日亞企業購品牌專場*/
+
+# Generated / temporary assets
+extracted_logos/
+compare_output/
+tmp_*.png
+raw_svg_test.png
+test_font_output.pdf
+amazon_logo.svg
+amazon_logo_white.svg
+amazon_logo_white.png
+amazon_logo_header.png
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editor / OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Kiro local state (keep steering and hooks in version control, nothing else)
+.kiro/settings/

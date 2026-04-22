@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deal 提報管理儀表板 | Amazon Global Selling Taiwan</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #161D26;
+    --orange: #FF6200;
+    --deep-orange: #F55600;
+    --off-white: #F5F3EF;
+    --white: #FFFFFF;
+    --border: #E8E6E1;
+    --gray: #6B7280;
+    --green: #16A34A;
+    --red: #DC2626;
+    --yellow: #F59E0B;
+    --blue: #2563EB;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Noto Sans TC',sans-serif; background:var(--off-white); color:var(--ink); font-size:14px; line-height:1.6; }
+  .navbar { background:var(--ink); padding:16px 32px; display:flex; align-items:center; gap:16px; }
+  .navbar .logo { display:flex; align-items:center; gap:12px; }
+  .navbar .logo svg { height:28px; }
+  .navbar .logo .title { color:var(--orange); font-size:18px; font-weight:700; }
+  .navbar .subtitle { color:#9CA3AF; font-size:13px; }
+  .container { max-width:1200px; margin:0 auto; padding:24px; }
+  .stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px; }
+  .stat-card { background:var(--white); border-radius:10px; padding:20px; border:1px solid var(--border); }
+  .stat-card .label { font-size:12px; color:var(--gray); margin-bottom:4px; }
+  .stat-card .value { font-size:28px; font-weight:700; }
+  .stat-card .value.orange { color:var(--orange); }
+  .stat-card .value.green { color:var(--green); }
+  .stat-card .value.red { color:var(--red); }
+  .stat-card .value.blue { color:var(--blue); }
+  .main-grid { display:grid; grid-template-columns:1fr 360px; gap:24px; }
+  .panel { background:var(--white); border-radius:10px; border:1px solid var(--border); overflow:hidden; }
+  .panel-header { padding:16px 20px; font-size:15px; font-weight:700; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; }
+  table { width:100%; border-collapse:collapse; }
+  th { text-align:left; padding:10px 16px; font-size:12px; color:var(--gray); background:#FAFAF8; border-bottom:1px solid var(--border); white-space:nowrap; }
+  td { padding:12px 16px; border-bottom:1px solid var(--border); font-size:13px; vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  tr:hover { background:#FAFAF8; }
+  .badge { display:inline-block; padding:2px 10px; border-radius:12px; font-size:11px; font-weight:700; white-space:nowrap; }
+  .badge.open { background:#DCFCE7; color:#166534; }
+  .badge.closed { background:#FEE2E2; color:#991B1B; }
+  .badge.upcoming { background:#FEF3C7; color:#92400E; }
+  .badge.pending { background:#E0E7FF; color:#4338CA; }
+  .badge.active { background:#DBEAFE; color:#1E40AF; }
+  .badge.ended { background:#F3F4F6; color:#6B7280; }
+  .type-badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:700; white-space:nowrap; }
+  .type-badge.points { background:#EDE9FE; color:#5B21B6; }
+  .type-badge.manual-bd { background:#FFF7ED; color:#C2410C; }
+  .type-badge.prime { background:#DBEAFE; color:#1E40AF; }
+  .type-badge.coupon { background:#FEF3C7; color:#92400E; }
+  .deal-name { font-weight:500; }
+  .deal-sub { font-size:12px; color:var(--gray); margin-top:2px; }
+  .link-btn { display:inline-block; background:var(--orange); color:var(--white); text-decoration:none; padding:4px 12px; border-radius:4px; font-size:12px; font-weight:700; white-space:nowrap; }
+  .link-btn:hover { background:var(--deep-orange); }
+  .link-btn.disabled { background:#D1D5DB; color:#9CA3AF; pointer-events:none; }
+  .deal-check { width:18px; height:18px; cursor:pointer; accent-color:var(--green); }
+  tr.checked-row { background:#F0FDF4; }
+  tr.checked-row td { color:#9CA3AF; }
+
+  /* Tabs */
+  .tabs { display:flex; gap:0; margin-bottom:0; }
+  .tab-btn { padding:12px 24px; font-size:14px; font-weight:700; cursor:pointer; border:1px solid var(--border); border-bottom:none; background:#FAFAF8; color:var(--gray); border-radius:10px 10px 0 0; margin-right:4px; transition:all .15s; }
+  .tab-btn.active { background:var(--white); color:var(--ink); border-bottom:1px solid var(--white); margin-bottom:-1px; position:relative; z-index:1; }
+  .tab-btn .count { display:inline-block; background:var(--off-white); color:var(--gray); font-size:11px; padding:1px 8px; border-radius:10px; margin-left:6px; }
+  .tab-btn.active .count { background:var(--orange); color:var(--white); }
+  .tab-content { display:none; }
+  .tab-content.active { display:block; }
+
+  /* Section header row */
+  .section-row td { padding:12px 16px; font-size:14px; font-weight:700; border-bottom:2px solid var(--blue); background:#F0F4FF; color:#1E40AF; }
+  .section-row .fba-note { font-weight:400; font-size:12px; color:var(--red); margin-left:12px; }
+
+  /* Calendar */
+  .calendar { padding:16px; }
+  .cal-nav { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+  .cal-nav button { background:none; border:1px solid var(--border); border-radius:6px; padding:4px 12px; cursor:pointer; font-size:14px; }
+  .cal-nav button:hover { background:var(--off-white); }
+  .cal-month { font-size:15px; font-weight:700; }
+  .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; text-align:center; }
+  .cal-grid .day-header { font-size:11px; color:var(--gray); padding:4px 0; font-weight:500; }
+  .cal-grid .day { padding:6px 2px; border-radius:6px; font-size:13px; position:relative; cursor:default; min-height:36px; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .cal-grid .day.other { color:#D1D5DB; }
+  .cal-grid .day.today { background:var(--ink); color:var(--white); font-weight:700; border-radius:50%; }
+  .cal-grid .day .dots { display:flex; gap:2px; position:absolute; bottom:2px; }
+  .dot { width:5px; height:5px; border-radius:50%; }
+  .dot.event { background:var(--blue); }
+  .dot.deadline { background:var(--red); }
+
+  /* Reminders */
+  .reminder-list { padding:16px; }
+  .reminder-item { display:flex; gap:12px; padding:12px 0; border-bottom:1px solid var(--border); align-items:flex-start; }
+  .reminder-item:last-child { border-bottom:none; }
+  .reminder-icon { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .reminder-icon.warn { background:#FEF3C7; }
+  .reminder-icon.urgent { background:#FEE2E2; }
+  .reminder-icon.info { background:#DBEAFE; }
+  .reminder-text { font-size:13px; }
+  .reminder-text .title { font-weight:500; }
+  .reminder-text .meta { font-size:12px; color:var(--gray); }
+
+  @media (max-width:900px) { .main-grid { grid-template-columns:1fr; } .stats-row { grid-template-columns:repeat(2,1fr); } }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="logo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" style="height:28px; filter:brightness(0) invert(1);">
+    <span class="title">Deal 提報管理</span>
+  </div>
+  <div class="subtitle">Amazon Global Selling Taiwan</div>
+</div>
+
+<div class="container">
+  <!-- Stats -->
+  <div class="stats-row" id="statsRow"></div>
+
+  <!-- Main -->
+  <div class="main-grid">
+    <div>
+      <!-- Tabs -->
+      <div class="tabs">
+        <div class="tab-btn active" data-tab="active">📋 進行中 / 開放提報 <span class="count" id="activeCount">0</span></div>
+        <div class="tab-btn" data-tab="upcoming">🗓️ 尚未開放提報 <span class="count" id="upcomingCount">0</span></div>
+        <div class="tab-btn" data-tab="ended">📁 已結束活動 <span class="count" id="endedCount">0</span></div>
+      </div>
+      <!-- Active tab -->
+      <div class="panel tab-content active" id="tab-active" style="border-radius:0 10px 10px 10px;">
+        <div style="overflow-x:auto;">
+          <table><thead><tr>
+            <th style="width:40px;text-align:center;">✓</th><th>活動名稱</th><th>Deal 類型</th><th>活動期間</th><th>提報截止</th><th>狀態</th><th>提報連結</th>
+          </tr></thead><tbody id="activeBody"></tbody></table>
+        </div>
+      </div>
+      <!-- Upcoming tab -->
+      <div class="panel tab-content" id="tab-upcoming" style="border-radius:0 10px 10px 10px;">
+        <div style="overflow-x:auto;">
+          <table><thead><tr>
+            <th style="width:40px;text-align:center;">✓</th><th>活動名稱</th><th>Deal 類型</th><th>活動期間</th><th>提報截止</th><th>狀態</th><th>提報連結</th>
+          </tr></thead><tbody id="upcomingBody"></tbody></table>
+        </div>
+      </div>
+      <!-- Ended tab -->
+      <div class="panel tab-content" id="tab-ended" style="border-radius:0 10px 10px 10px;">
+        <div style="overflow-x:auto;">
+          <table><thead><tr>
+            <th>活動名稱</th><th>Deal 類型</th><th>活動期間</th><th>提報截止</th><th>狀態</th>
+          </tr></thead><tbody id="endedBody"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column -->
+    <div style="display:flex; flex-direction:column; gap:24px;">
+      <div class="panel">
+        <div class="panel-header" id="calHeader">📅 活動日曆</div>
+        <div class="calendar">
+          <div class="cal-nav">
+            <button id="calPrev">◀</button>
+            <div class="cal-month" id="calMonth"></div>
+            <button id="calNext">▶</button>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+          <div style="margin-top:12px;display:flex;gap:16px;font-size:11px;color:#6B7280;">
+            <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2563EB;vertical-align:middle;"></span> 活動期間</span>
+            <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#DC2626;vertical-align:middle;"></span> 提報截止</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-header">🔔 近期提醒</div>
+        <div class="reminder-list" id="reminderList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============ DATA ============
+const NOW = new Date();
+
+const deals = [
+  {
+    id: 'pd4',
+    name: '積分狂歡節 #4（仲春大促）',
+    sub: 'Qualtrics 提報',
+    type: 'points', typeLabel: '積分',
+    eventStart: '2026-04-14T09:00', eventEnd: '2026-04-22T23:59',
+    deadlines: [{ label: '', date: '2026-04-05T23:59' }],
+    link: 'https://amazonexteu.qualtrics.com/jfe/form/SV_dmtOlEMKWMiUnT8',
+    linkLabel: '立即提報',
+    group: null
+  },
+  {
+    id: 'monthly3',
+    name: '第三次月促 — Manual BD',
+    sub: '兩輪報名｜需設定至少 1% 積分',
+    type: 'manual-bd', typeLabel: 'Manual BD',
+    eventStart: '2026-04-30T00:00', eventEnd: '2026-05-03T23:59',
+    deadlines: [
+      { label: '第一輪', date: '2026-04-15T18:00' },
+      { label: '第二輪', date: '2026-04-22T18:00' }
+    ],
+    link: 'https://suv.ma.globalsellingcommunity.cn/s/694b4d2c3e2c0c0065545a50?source=2&code=&scenes=1&org_code=amazon&deliver_id=694b555291f952316c37275c&xm_project_id=694b4d2c3e2c0c0065545a50&signature=0a9dccc92f75183c4799155c488f0700',
+    linkLabel: '立即提報',
+    earlyBird: '💡 第一輪提交最多收 6 個促銷費用',
+    group: null
+  },
+  {
+    id: 'monthly-points',
+    name: '4月月促（積分促銷）',
+    sub: '賣家平台 / Qualtrics',
+    type: 'points', typeLabel: '積分',
+    eventStart: '2026-04-30T09:00', eventEnd: '2026-05-03T23:59',
+    deadlines: [{ label: '', date: '2026-04-19T23:59' }],
+    link: 'https://amazonexteu.qualtrics.com/jfe/form/SV_e8OXHh3llHfCPno',
+    linkLabel: '立即提報',
+    group: null
+  },
+  {
+    id: 'pd5',
+    name: '積分狂歡節 #5',
+    sub: '賣家平台 / Qualtrics',
+    type: 'points', typeLabel: '積分',
+    eventStart: '2026-05-08T09:00', eventEnd: '2026-05-17T23:59',
+    deadlines: [{ label: '', date: '2026-04-19T23:59' }],
+    link: 'https://amazonexteu.qualtrics.com/jfe/form/SV_e8OXHh3llHfCPno',
+    linkLabel: '立即提報',
+    group: null
+  },
+  {
+    id: 'monthly4',
+    name: '第四次月促 — Manual BD',
+    sub: '提報資訊待公告',
+    type: 'manual-bd', typeLabel: 'Manual BD',
+    eventStart: '2026-05-27T09:00', eventEnd: '2026-06-02T23:59',
+    deadlines: [{ label: '', date: '2026-05-27T00:00' }],
+    deadlineText: '待公告',
+    link: '#',
+    linkLabel: '待公告',
+    pendingRegistration: true,
+    group: null
+  },
+  {
+    id: 'b2b-brand-standard-2026',
+    name: '2026 日亞企業購品牌專場（普通展位）',
+    sub: '無須提報｜後台設定 ≥5% 企業折扣自動抓取',
+    type: 'manual-bd', typeLabel: 'B2B',
+    eventStart: '2026-04-20T00:00', eventEnd: '2026-12-31T23:59',
+    deadlines: [{ label: '活動期間內', date: '2026-12-31T23:59' }],
+    deadlineText: '活動期間內',
+    link: 'https://sellercentral-japan.amazon.com/learn/courses?moduleId=53dd5575-3ed8-4f18-8d30-94ee94494d01&courseId=c62c045f-a7ed-4051-98a1-d1c407edfc89&refTag=su_course_accordion&modLanguage=Chinese',
+    linkLabel: '設定教學',
+    earlyBird: '💡 普通展位每日刷新自動抓取，儘早設定爭取曝光',
+    group: null
+  },
+  // Prime Day
+  {
+    id: 'prime-bd',
+    name: 'Prime 會員專享 Z 劃算',
+    sub: 'PE-BD｜預付費 ¥600 + 銷售額 1.0%',
+    type: 'prime', typeLabel: 'PE-BD',
+    eventStart: '2026-07-01T00:00', eventEnd: '2026-07-31T23:59',
+    eventText: '待定',
+    deadlines: [{ label: '', date: '2026-07-05T23:59' }],
+    link: 'https://sellercentral.amazon.co.jp/ap/signin?clientContext=358-4993678-4963308&openid.pape.max_auth_age=300&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&language=ja_JP&pageId=sc_amazon_v3_unified&openid.pape.preferred_auth_policies=Policy15&openid.return_to=https%3A%2F%2Fsellercentral.amazon.co.jp%2Fmerchandising-new%2Flanding&openid.assoc_handle=sc_jp_amazon_v2&openid.mode=checkid_setup&intercept=false&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0',
+    linkLabel: '賣家平台',
+    earlyBird: '💡 4/30前提交省 ¥500',
+    group: 'prime'
+  },
+  {
+    id: 'prime-ld',
+    name: 'Prime 會員專享秒殺',
+    sub: 'PE-LD',
+    type: 'prime', typeLabel: 'PE-LD',
+    eventStart: '2026-07-01T00:00', eventEnd: '2026-07-31T23:59',
+    eventText: '待定',
+    deadlines: [{ label: '', date: '2026-07-05T23:59' }],
+    link: 'https://sellercentral.amazon.co.jp/ap/signin?clientContext=358-4993678-4963308&openid.pape.max_auth_age=300&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&language=ja_JP&pageId=sc_amazon_v3_unified&openid.pape.preferred_auth_policies=Policy15&openid.return_to=https%3A%2F%2Fsellercentral.amazon.co.jp%2Fmerchandising-new%2Flanding&openid.assoc_handle=sc_jp_amazon_v2&openid.mode=checkid_setup&intercept=false&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0',
+    linkLabel: '賣家平台',
+    earlyBird: '💡 4/30前提交省 ¥500',
+    group: 'prime'
+  },
+  {
+    id: 'prime-ped',
+    name: 'Prime 會員專享折扣',
+    sub: 'PED｜預付費 ¥600 + 銷售額 1.0%',
+    type: 'prime', typeLabel: 'Prime Day',
+    eventStart: '2026-07-01T00:00', eventEnd: '2026-07-31T23:59',
+    eventText: '待定',
+    deadlines: [{ label: '活動前 12 小時', date: '2026-07-31T23:59' }],
+    deadlineText: '活動前 12 小時',
+    link: 'https://sellercentral.amazon.co.jp/ap/signin?clientContext=358-4993678-4963308&openid.pape.max_auth_age=300&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&language=ja_JP&pageId=sc_amazon_v3_unified&openid.pape.preferred_auth_policies=Policy15&openid.return_to=https%3A%2F%2Fsellercentral.amazon.co.jp%2Fdiscounts%2F&openid.assoc_handle=sc_jp_amazon_v2&openid.mode=checkid_setup&intercept=false&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0',
+    linkLabel: '賣家平台',
+    group: 'prime'
+  },
+  {
+    id: 'prime-points',
+    name: '積分促銷（Points Deal）',
+    sub: '免費｜推薦積分率 10%',
+    type: 'points', typeLabel: '積分',
+    eventStart: '2026-07-01T00:00', eventEnd: '2026-07-31T23:59',
+    eventText: '待定',
+    deadlines: [{ label: '活動期間內', date: '2026-07-31T23:59' }],
+    deadlineText: '活動期間內',
+    link: 'https://sellercentral.amazon.co.jp/ap/signin?clientContext=358-4993678-4963308&openid.pape.max_auth_age=300&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&language=ja_JP&pageId=sc_amazon_v3_unified&openid.pape.preferred_auth_policies=Policy15&openid.return_to=https%3A%2F%2Fsellercentral.amazon.co.jp%2Fpoints-central%2Fpromotions&openid.assoc_handle=sc_jp_amazon_v2&openid.mode=checkid_setup&intercept=false&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0',
+    linkLabel: '賣家平台',
+    group: 'prime'
+  },
+  {
+    id: 'prime-coupon',
+    name: '優惠券',
+    sub: '建立費 ¥150/張 + 兌換銷售額 1.5%',
+    type: 'coupon', typeLabel: '優惠券',
+    eventStart: '2026-07-01T00:00', eventEnd: '2026-07-31T23:59',
+    eventText: '待定',
+    deadlines: [{ label: '活動期間內', date: '2026-07-31T23:59' }],
+    deadlineText: '活動期間內',
+    link: 'https://sellercentral.amazon.co.jp/ap/signin?clientContext=358-4993678-4963308&openid.pape.max_auth_age=300&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&language=ja_JP&pageId=sc_amazon_v3_unified&openid.pape.preferred_auth_policies=Policy15&openid.return_to=https%3A%2F%2Fsellercentral.amazon.co.jp%2Fcoupons%2Fcoupons-dashboard-page&openid.assoc_handle=sc_jp_amazon_v2&openid.mode=checkid_setup&intercept=false&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0',
+    linkLabel: '賣家平台',
+    group: 'prime'
+  }
+];
+
+const PRIME_FBA_DEADLINE = '2026-06-29';
+
+// ============ HELPERS ============
+function p(d) { return new Date(d); }
+function fmt(d) {
+  const dt = p(d);
+  const days = ['日','一','二','三','四','五','六'];
+  return `${dt.getMonth()+1}/${dt.getDate()}（${days[dt.getDay()]}）${String(dt.getHours()).padStart(2,'0')}:${String(dt.getMinutes()).padStart(2,'0')}`;
+}
+function fmtShort(d) {
+  const dt = p(d);
+  const days = ['日','一','二','三','四','五','六'];
+  return `${dt.getMonth()+1}/${dt.getDate()}（${days[dt.getDay()]}）`;
+}
+function diffDays(d) { return Math.ceil((p(d) - NOW) / 86400000); }
+
+function getStatus(deal) {
+  const es = p(deal.eventStart), ee = p(deal.eventEnd);
+  const lastDeadline = p(deal.deadlines[deal.deadlines.length - 1].date);
+  if (NOW > ee) return 'ended';
+  if (NOW >= es && NOW <= ee) return 'active';
+  if (deal.pendingRegistration) return 'pending';
+  if (NOW <= lastDeadline) return 'open';
+  if (NOW > lastDeadline && NOW < es) return 'upcoming';
+  return 'upcoming';
+}
+
+function allDeadlinesPassed(deal) {
+  return deal.deadlines.every(dl => NOW > p(dl.date));
+}
+
+function isEnded(deal) { return NOW > p(deal.eventEnd); }
+
+// ============ RENDER TABLE ============
+const STORAGE_KEY = 'deal_dashboard_checks';
+function loadChecks() { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+function saveChecks(obj) { localStorage.setItem(STORAGE_KEY, JSON.stringify(obj)); }
+
+function renderRow(deal, showCheck) {
+  const status = getStatus(deal);
+  const deadlineClosed = allDeadlinesPassed(deal);
+  const checks = loadChecks();
+
+  let deadlineHtml = '';
+  if (deal.deadlineText) {
+    deadlineHtml = deal.deadlineText;
+  } else {
+    deadlineHtml = deal.deadlines.map(dl => {
+      const prefix = dl.label ? dl.label + '：' : '';
+      return prefix + fmt(dl.date);
+    }).join('<br>');
+  }
+  if (deal.earlyBird && !deadlineClosed) {
+    deadlineHtml += `<br><span style="font-size:11px;color:#16A34A;">${deal.earlyBird}</span>`;
+  }
+
+  const statusMap = {
+    open: '<span class="badge open">開放提報</span>',
+    active: '<span class="badge active">活動進行中</span>',
+    upcoming: '<span class="badge upcoming">即將到來</span>',
+    pending: '<span class="badge pending">尚未開放提報</span>',
+    ended: '<span class="badge ended">已結束</span>',
+    closed: '<span class="badge closed">已截止</span>'
+  };
+  let statusHtml = statusMap[status] || '';
+  if (status === 'active' && deadlineClosed) statusHtml = statusMap.active;
+
+  let linkHtml = '';
+  if (status === 'ended') {
+    linkHtml = '<span class="link-btn disabled">已結束</span>';
+  } else if (deadlineClosed) {
+    linkHtml = '<span class="link-btn disabled">已截止</span>';
+  } else if (!deal.link || deal.link === '#') {
+    linkHtml = `<span class="link-btn disabled">${deal.linkLabel || '待公告'}</span>`;
+  } else {
+    linkHtml = `<a class="link-btn" href="${deal.link}" target="_blank">${deal.linkLabel}</a>`;
+  }
+
+  const checked = checks[deal.id] ? 'checked' : '';
+  const rowClass = checks[deal.id] ? 'class="checked-row"' : '';
+
+  let checkTd = '';
+  if (showCheck) {
+    checkTd = `<td style="text-align:center;"><input type="checkbox" class="deal-check" data-deal="${deal.id}" ${checked}></td>`;
+  }
+
+  return `<tr ${rowClass} data-id="${deal.id}">
+    ${checkTd}
+    <td><div class="deal-name">${deal.name}</div><div class="deal-sub">${deal.sub}</div></td>
+    <td><span class="type-badge ${deal.type}">${deal.typeLabel}</span></td>
+    <td>${deal.eventText || (fmt(deal.eventStart) + '<br>～ ' + fmt(deal.eventEnd))}</td>
+    <td>${deadlineHtml}</td>
+    <td>${statusHtml}</td>
+    ${showCheck ? '<td>' + linkHtml + '</td>' : ''}
+  </tr>`;
+}
+
+function renderTables() {
+  const nonEnded = deals.filter(d => !isEnded(d));
+  const endedDeals = deals.filter(d => isEnded(d));
+
+  // Split non-ended into "active/open/upcoming" and "pending"
+  const activeDeals = nonEnded.filter(d => {
+    const s = getStatus(d);
+    return s === 'active' || s === 'open' || s === 'upcoming';
+  });
+  const upcomingDeals = nonEnded.filter(d => getStatus(d) === 'pending');
+
+  // Helper: render a grouped bucket (non-prime then prime section)
+  function renderBucket(bucket, showCheck, colspan) {
+    const nonPrime = bucket.filter(d => d.group !== 'prime');
+    const prime = bucket.filter(d => d.group === 'prime');
+    let html = nonPrime.map(d => renderRow(d, showCheck)).join('');
+    if (prime.length > 0) {
+      const fbaNote = (showCheck && diffDays(PRIME_FBA_DEADLINE) > 0)
+        ? `<span class="fba-note">📦 FBA 入倉截止：${fmtShort(PRIME_FBA_DEADLINE)}｜建議海運常規補貨、緊急用標準空運</span>` : '';
+      html += `<tr class="section-row"><td colspan="${colspan}">🏆 2026 Prime 會員日（預計7月）${fbaNote}</td></tr>`;
+      html += prime.map(d => renderRow(d, showCheck)).join('');
+    }
+    return html;
+  }
+
+  // Active tab
+  let activeHtml = renderBucket(activeDeals, true, 7);
+  if (activeDeals.length === 0) {
+    activeHtml = '<tr><td colspan="7" style="text-align:center;padding:40px;color:#9CA3AF;">目前沒有進行中或開放提報的活動</td></tr>';
+  }
+  document.getElementById('activeBody').innerHTML = activeHtml;
+
+  // Upcoming tab
+  let upcomingHtml = renderBucket(upcomingDeals, true, 7);
+  if (upcomingDeals.length === 0) {
+    upcomingHtml = '<tr><td colspan="7" style="text-align:center;padding:40px;color:#9CA3AF;">目前沒有尚未開放提報的活動</td></tr>';
+  }
+  document.getElementById('upcomingBody').innerHTML = upcomingHtml;
+
+  // Ended tab
+  const endedNonPrime = endedDeals.filter(d => d.group !== 'prime');
+  const endedPrime = endedDeals.filter(d => d.group === 'prime');
+  let endedHtml = endedNonPrime.map(d => renderRow(d, false)).join('');
+  if (endedPrime.length > 0) {
+    endedHtml += `<tr class="section-row"><td colspan="5">🏆 Prime 會員日</td></tr>`;
+    endedHtml += endedPrime.map(d => renderRow(d, false)).join('');
+  }
+  if (endedDeals.length === 0) {
+    endedHtml = '<tr><td colspan="5" style="text-align:center;padding:40px;color:#9CA3AF;">目前沒有已結束的活動</td></tr>';
+  }
+  document.getElementById('endedBody').innerHTML = endedHtml;
+
+  // Counts
+  document.getElementById('activeCount').textContent = activeDeals.length;
+  document.getElementById('upcomingCount').textContent = upcomingDeals.length;
+  document.getElementById('endedCount').textContent = endedDeals.length;
+
+  // Stats
+  let cntActive = 0, cntOpen = 0, cntPending = upcomingDeals.length, cntEnded = endedDeals.length;
+  activeDeals.forEach(d => {
+    const s = getStatus(d);
+    if (s === 'active') cntActive++;
+    else if (s === 'open') cntOpen++;
+  });
+  document.getElementById('statsRow').innerHTML = `
+    <div class="stat-card"><div class="label">活動進行中</div><div class="value blue">${cntActive}</div></div>
+    <div class="stat-card"><div class="label">開放提報中</div><div class="value orange">${cntOpen}</div></div>
+    <div class="stat-card"><div class="label">尚未開放提報</div><div class="value green">${cntPending}</div></div>
+    <div class="stat-card"><div class="label">已結束</div><div class="value red">${cntEnded}</div></div>
+  `;
+
+  // Bind checkboxes
+  document.querySelectorAll('.deal-check').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const row = cb.closest('tr');
+      row.classList.toggle('checked-row', cb.checked);
+      const saved = loadChecks();
+      saved[cb.dataset.deal] = cb.checked;
+      saveChecks(saved);
+    });
+  });
+}
+
+// ============ TABS ============
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ============ REMINDERS ============
+function renderReminders() {
+  const items = [];
+  deals.forEach(d => {
+    if (isEnded(d)) return;
+    d.deadlines.forEach(dl => {
+      if (d.deadlineText) return; // skip "活動期間內" type
+      const days = diffDays(dl.date);
+      if (days < 0) return; // already passed
+      const prefix = dl.label ? d.name + ' — ' + dl.label + '截止' : d.name + ' 提報截止';
+      let icon = 'info', emoji = '📅';
+      if (days === 0) { icon = 'urgent'; emoji = '🔴'; }
+      else if (days <= 7) { icon = 'warn'; emoji = '⚠️'; }
+      const meta = days === 0 ? '今天 ' + fmt(dl.date) : fmtShort(dl.date) + ' — 剩餘 ' + days + ' 天';
+      items.push({ days, html: `<div class="reminder-item"><div class="reminder-icon ${icon}">${emoji}</div><div class="reminder-text"><div class="title">${prefix}</div><div class="meta">${meta}</div></div></div>` });
+    });
+    // Event start reminder
+    const startDays = diffDays(d.eventStart);
+    if (startDays > 0 && startDays <= 30 && d.group !== 'prime') {
+      items.push({ days: startDays, html: `<div class="reminder-item"><div class="reminder-icon info">📅</div><div class="reminder-text"><div class="title">${d.name} 活動開始</div><div class="meta">${fmt(d.eventStart)}</div></div></div>` });
+    }
+  });
+  // FBA deadline
+  const fbaDays = diffDays(PRIME_FBA_DEADLINE);
+  if (fbaDays >= 0) {
+    items.push({ days: fbaDays, html: `<div class="reminder-item"><div class="reminder-icon ${fbaDays <= 14 ? 'warn' : 'info'}">📦</div><div class="reminder-text"><div class="title">Prime Day FBA 入倉截止</div><div class="meta">${fmtShort(PRIME_FBA_DEADLINE)} — 剩餘 ${fbaDays} 天</div></div></div>` });
+  }
+  // Early bird
+  const earlyDays = diffDays('2026-04-30T23:59');
+  if (earlyDays >= 0) {
+    items.push({ days: earlyDays, html: `<div class="reminder-item"><div class="reminder-icon warn">💰</div><div class="reminder-text"><div class="title">Prime Day 早鳥優惠截止 — Z劃算/秒殺省 ¥500</div><div class="meta">4/30 前提交 — 剩餘 ${earlyDays} 天</div></div></div>` });
+  }
+
+  items.sort((a, b) => a.days - b.days);
+  document.getElementById('reminderList').innerHTML = items.map(i => i.html).join('') || '<div style="padding:20px;text-align:center;color:#9CA3AF;">目前沒有近期提醒</div>';
+}
+
+// ============ CALENDAR ============
+let calYear = NOW.getFullYear(), calMonth = NOW.getMonth();
+
+function renderCalendar() {
+  const monthNames = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  document.getElementById('calMonth').textContent = calYear + '年 ' + monthNames[calMonth];
+
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const daysInPrev = new Date(calYear, calMonth, 0).getDate();
+  const todayDate = NOW.getDate();
+  const isCurrentMonth = calYear === NOW.getFullYear() && calMonth === NOW.getMonth();
+
+  // Collect calendar events
+  const calEvents = [];
+  deals.forEach(d => {
+    const es = p(d.eventStart), ee = p(d.eventEnd);
+    calEvents.push({ start: es, end: ee, type: 'event' });
+    d.deadlines.forEach(dl => {
+      if (!d.deadlineText) calEvents.push({ start: p(dl.date), end: p(dl.date), type: 'deadline' });
+    });
+  });
+
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+  const dayNames = ['日','一','二','三','四','五','六'];
+  dayNames.forEach(dn => { const el = document.createElement('div'); el.className = 'day-header'; el.textContent = dn; grid.appendChild(el); });
+
+  for (let i = firstDay - 1; i >= 0; i--) {
+    const el = document.createElement('div'); el.className = 'day other'; el.innerHTML = `<span>${daysInPrev - i}</span>`; grid.appendChild(el);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const el = document.createElement('div');
+    const isToday = isCurrentMonth && d === todayDate;
+    el.className = 'day' + (isToday ? ' today' : '');
+    el.innerHTML = `<span>${d}</span>`;
+
+    const thisDate = new Date(calYear, calMonth, d);
+    const dots = new Set();
+    calEvents.forEach(ev => {
+      const evStart = new Date(ev.start.getFullYear(), ev.start.getMonth(), ev.start.getDate());
+      const evEnd = new Date(ev.end.getFullYear(), ev.end.getMonth(), ev.end.getDate());
+      if (thisDate >= evStart && thisDate <= evEnd) dots.add(ev.type);
+    });
+
+    if (dots.size > 0 && !isToday) {
+      const dc = document.createElement('div'); dc.className = 'dots';
+      dots.forEach(t => { const dot = document.createElement('div'); dot.className = 'dot ' + t; dc.appendChild(dot); });
+      el.appendChild(dc);
+    }
+    grid.appendChild(el);
+  }
+
+  const totalCells = firstDay + daysInMonth;
+  const remaining = (7 - totalCells % 7) % 7;
+  for (let i = 1; i <= remaining; i++) {
+    const el = document.createElement('div'); el.className = 'day other'; el.innerHTML = `<span>${i}</span>`; grid.appendChild(el);
+  }
+}
+
+document.getElementById('calPrev').addEventListener('click', () => { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(); });
+document.getElementById('calNext').addEventListener('click', () => { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCalendar(); });
+
+// ============ INIT ============
+renderTables();
+renderReminders();
+renderCalendar();
+</script>
+</body>
+</html>

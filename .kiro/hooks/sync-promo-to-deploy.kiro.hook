@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "同步促銷活動到 Deploy Dashboard",
+  "description": "當活動資料夾內新的 email_template.html 產生後，自動提醒 agent 把該活動加到 deploy/index.html 的 deals 陣列，保持 dashboard 同步。",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "**/email_template.html"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "偵測到新的 email_template.html 產生，代表有新活動產出。請執行以下步驟同步到 Deploy Dashboard：\n\n1. 讀取剛產出的活動資料夾（email_template.html、LINE_blurb.txt、.msg 檔名）確認活動資訊\n2. 打開 deploy/index.html，在 deals 陣列中新增一筆活動物件，欄位包括：\n   - id（kebab-case 唯一識別）\n   - name（活動名稱）\n   - sub（副標/提報方式）\n   - type + typeLabel（points / manual-bd / prime / coupon / b2b）\n   - eventStart / eventEnd（ISO 格式 YYYY-MM-DDTHH:mm）\n   - deadlines（陣列，每個含 label 和 date；若活動期間內設定就用 deadlineText）\n   - link + linkLabel（提報或設定連結）\n   - earlyBird（選填，綠色小字提示）\n   - group（若屬 Prime Day 活動填 'prime'，否則 null）\n3. 新活動物件插在既有活動之間（按時間順序），不要破壞現有結構\n4. 完成後告訴使用者 dashboard 已同步，該活動會在瀏覽器端自動顯示狀態與倒數提醒\n\n僅加一筆，不要動其他活動資料。"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "PDF 簡繁轉換情境載入",
+  "description": "當使用者提交的訊息包含 PDF 簡繁轉換相關關鍵字（如「繁體」、「簡轉繁」、「s2t」、「opencc」）時，自動提醒載入 .kiro/steering/pdf-s2t-conversion.md 並遵循其中的標準流程與品質檢查清單。",
+  "version": "1",
+  "when": {
+    "type": "promptSubmit"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "若使用者訊息涉及 PDF 簡體轉繁體（關鍵字如「繁體」、「簡轉繁」、「s2t」、「opencc」、「簡體」、「PDF 轉換」），請務必先閱讀 .kiro/steering/pdf-s2t-conversion.md，遵循其中的：\n\n1. 標準轉換流程（fontsize 分組、ASCII/CJK 分段、redact + 重新插入）\n2. 必做的 7 項品質檢查（簡體殘留、文字重疊、字體大小、溢出、覆蓋殘留、超連結、圖片保留）\n3. 5 個已知技術陷阱（ASCII 寬度、origin 累積誤差、Calibri 渲染、檔案鎖定、Windows Unicode）\n\n轉換完成後主動執行 quality_check 函數並回報結果，不要等使用者自己發現問題。\n\n若使用者訊息與 PDF 轉換無關，忽略此提示。"
+  }
+}

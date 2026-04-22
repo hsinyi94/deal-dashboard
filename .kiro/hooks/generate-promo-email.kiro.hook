@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "產出促銷 Email + LINE",
+  "description": "手動觸發後，根據使用者提供的促銷活動資訊，自動產出 email HTML、Outlook .msg 檔案和 LINE blurb 文字檔。",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "使用者要產出促銷活動的 email 和 LINE blurb。請先讀取 .kiro/steering/promotion-workflow.md 了解完整 SOP，然後檢查對話中是否已有活動資訊。如果資訊完整就直接按 SOP 產出三個檔案（email_template.html、.msg、LINE_blurb.txt）；如果缺少必要資訊，請向使用者詢問。"
+  }
+}
