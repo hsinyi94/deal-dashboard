@@ -225,7 +225,79 @@ const deals = [
     linkLabel: '立即提報',
     group: null
   },
+  {
+    id: 'mde4-points-deal',
+    name: '第四次月促（MDE#4）— Points DEAL 積分促銷',
+    sub: 'Qualtrics 提報｜免費｜設定 5%～50% 積分',
+    type: 'points', typeLabel: '積分',
+    eventStart: '2026-05-27T09:00', eventEnd: '2026-06-02T23:59',
+    deadlines: [{ label: '', date: '2026-05-19T23:59' }],
+    link: 'https://amazonexteu.qualtrics.com/jfe/form/SV_e8OXHh3llHfCPno',
+    linkLabel: '立即提報',
+    earlyBird: '💡 積分徽章從 5/27 0:00(JST) 生效｜自助服務另見 Points DEAL 入口網站',
+    group: null
+  },
+  {
+    id: 'monthly4',
+    name: '第四次月促（MDE#4）— Manual BD',
+    sub: '兩輪報名｜需設定至少 1% 積分',
+    type: 'manual-bd', typeLabel: 'Manual BD',
+    eventStart: '2026-05-27T00:00', eventEnd: '2026-06-02T23:59',
+    deadlines: [
+      { label: '第一輪', date: '2026-05-06T18:00' },
+      { label: '第二輪', date: '2026-05-13T18:00' }
+    ],
+    link: 'https://suv.ma.globalsellingcommunity.cn/t/5RRVRp',
+    linkLabel: '立即提報',
+    earlyBird: '💡 第一輪提交最多收 6 個促銷費用（省很大）',
+    group: null
+  },
+  {
+    id: 'hde2',
+    name: '初夏促銷（HDE#2）— Manual BD',
+    sub: '兩輪報名｜需設定至少 1% 積分',
+    type: 'manual-bd', typeLabel: 'Manual BD',
+    eventStart: '2026-05-20T00:00', eventEnd: '2026-05-27T08:59',
+    deadlines: [
+      { label: '第一輪', date: '2026-05-06T18:00' },
+      { label: '第二輪', date: '2026-05-13T18:00' }
+    ],
+    link: 'https://suv.ma.globalsellingcommunity.cn/t/5RRVRp',
+    linkLabel: '立即提報',
+    earlyBird: '💡 第一輪提交最多收 6 個促銷費用（省很大）',
+    group: null
+  },
+  {
+    id: 'b2b-brand-standard-2026',
+    name: '2026 日亞企業購品牌專場（普通展位）',
+    sub: '無須提報｜後台設定 ≥5% 企業折扣自動抓取',
+    type: 'manual-bd', typeLabel: 'B2B',
+    eventStart: '2026-04-20T00:00', eventEnd: '2026-12-31T23:59',
+    deadlines: [{ label: '活動期間內', date: '2026-12-31T23:59' }],
+    deadlineText: '活動期間內',
+    link: 'https://sellercentral-japan.amazon.com/learn/courses?moduleId=53dd5575-3ed8-4f18-8d30-94ee94494d01&courseId=c62c045f-a7ed-4051-98a1-d1c407edfc89&refTag=su_course_accordion&modLanguage=Chinese',
+    linkLabel: '設定教學',
+    earlyBird: '💡 普通展位每日刷新自動抓取，儘早設定爭取曝光',
+    group: null
+  },
   // Prime Day
+  {
+    id: 'prime-manual-bd',
+    name: 'Prime 會員日 — Manual BD',
+    sub: '三輪報名｜預付費 ¥600 + 銷售額 1.0%｜需設定至少 1% 積分',
+    type: 'manual-bd', typeLabel: 'Manual BD',
+    eventStart: '2026-07-01T00:00', eventEnd: '2026-07-31T23:59',
+    eventText: '待定',
+    deadlines: [
+      { label: '第一輪', date: '2026-05-23T18:00' },
+      { label: '第二輪', date: '2026-05-30T18:00' },
+      { label: '第三輪', date: '2026-06-06T18:00' }
+    ],
+    link: 'https://suv.ma.globalsellingcommunity.cn/t/5RR5fa',
+    linkLabel: '立即提報',
+    earlyBird: '💡 第一輪提交最多收 6 個促銷費用（省很大）',
+    group: 'prime'
+  },
   {
     id: 'prime-bd',
     name: 'Prime 會員專享 Z 劃算',
@@ -234,9 +306,8 @@ const deals = [
     eventStart: '2026-07-01T00:00', eventEnd: '2026-07-31T23:59',
     eventText: '待定',
     deadlines: [{ label: '', date: '2026-07-05T23:59' }],
-    link: 'https://sellercentral.amazon.co.jp/ap/signin?clientContext=358-4993678-4963308&openid.pape.max_auth_age=300&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&language=ja_JP&pageId=sc_amazon_v3_unified&openid.pape.preferred_auth_policies=Policy15&openid.return_to=https%3A%2F%2Fsellercentral.amazon.co.jp%2Fmerchandising-new%2Flanding&openid.assoc_handle=sc_jp_amazon_v2&openid.mode=checkid_setup&intercept=false&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0',
+    link: 'https://sellercentral.amazon.co.jp/merchandising-new/landing',
     linkLabel: '賣家平台',
-    earlyBird: '💡 4/30前提交省 ¥500',
     group: 'prime'
   },
   {
@@ -247,9 +318,8 @@ const deals = [
     eventStart: '2026-07-01T00:00', eventEnd: '2026-07-31T23:59',
     eventText: '待定',
     deadlines: [{ label: '', date: '2026-07-05T23:59' }],
-    link: 'https://sellercentral.amazon.co.jp/ap/signin?clientContext=358-4993678-4963308&openid.pape.max_auth_age=300&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&language=ja_JP&pageId=sc_amazon_v3_unified&openid.pape.preferred_auth_policies=Policy15&openid.return_to=https%3A%2F%2Fsellercentral.amazon.co.jp%2Fmerchandising-new%2Flanding&openid.assoc_handle=sc_jp_amazon_v2&openid.mode=checkid_setup&intercept=false&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0',
+    link: 'https://sellercentral.amazon.co.jp/merchandising-new/landing',
     linkLabel: '賣家平台',
-    earlyBird: '💡 4/30前提交省 ¥500',
     group: 'prime'
   },
   {
