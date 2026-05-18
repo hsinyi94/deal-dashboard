@@ -72,9 +72,9 @@ html_body = f'''<html>
   <!-- DEADLINE -->
   <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#FFF4EC;border-left:4px solid #FF6200;margin:24px 0;">
   <tr><td style="padding:14px 20px;font-size:15px;font-weight:700;">
-    <p style="margin:0 0 8px;">&#9200; 第一輪報名截止：<span style="color:#FF6200;">2026 年 5 月 23 日（週五）18:00</span>（有費用折扣！）</p>
-    <p style="margin:0 0 8px;">&#9200; 第二輪報名截止：2026 年 5 月 30 日（週五）18:00</p>
-    <p style="margin:0;">&#9200; 第三輪報名截止：2026 年 6 月 6 日（週五）18:00</p>
+    <p style="margin:0 0 8px;">&#9200; 第一輪報名截止：<span style="color:#FF6200;">2026 年 5 月 23 日 18:00</span>（有費用折扣！）</p>
+    <p style="margin:0 0 8px;">&#9200; 第二輪報名截止：2026 年 5 月 30 日 18:00</p>
+    <p style="margin:0;">&#9200; 第三輪報名截止：2026 年 6 月 6 日 18:00</p>
   </td></tr>
   </table>
 
