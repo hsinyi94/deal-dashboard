@@ -563,16 +563,23 @@ function renderTables() {
   });
   const upcomingDeals = nonEnded.filter(d => getStatus(d) === 'pending');
 
-  // Helper: render a grouped bucket (non-prime then prime section)
+  // Helper: render a grouped bucket (non-grouped, then prime section, then pbdd section)
   function renderBucket(bucket, showCheck, colspan) {
-    const nonPrime = bucket.filter(d => d.group !== 'prime');
+    const nonGrouped = bucket.filter(d => !d.group);
     const prime = bucket.filter(d => d.group === 'prime');
-    let html = nonPrime.map(d => renderRow(d, showCheck)).join('');
+    const pbdd = bucket.filter(d => d.group === 'pbdd');
+    let html = nonGrouped.map(d => renderRow(d, showCheck)).join('');
     if (prime.length > 0) {
       const fbaNote = (showCheck && diffDays(PRIME_FBA_DEADLINE) > 0)
         ? `<span class="fba-note">📦 FBA 入倉截止：${fmtShort(PRIME_FBA_DEADLINE)}｜建議海運常規補貨、緊急用標準空運</span>` : '';
       html += `<tr class="section-row"><td colspan="${colspan}">🏆 2026 Prime 會員日（預計7月）${fbaNote}</td></tr>`;
       html += prime.map(d => renderRow(d, showCheck)).join('');
+    }
+    if (pbdd.length > 0) {
+      const pbddFbaNote = (showCheck && diffDays(PBDD_FBA_DEADLINE) > 0)
+        ? `<span class="fba-note">📦 FBA 入倉截止：${fmtShort(PBDD_FBA_DEADLINE)}｜Prime 感謝特賣參加商品需送達 FBA</span>` : '';
+      html += `<tr class="section-row"><td colspan="${colspan}">🎁 2026 Prime 感謝特賣 PBDD（預計10月）${pbddFbaNote}</td></tr>`;
+      html += pbdd.map(d => renderRow(d, showCheck)).join('');
     }
     return html;
   }
