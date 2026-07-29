@@ -675,14 +675,19 @@ function renderReminders() {
     });
     // Event start reminder
     const startDays = diffDays(d.eventStart);
-    if (startDays > 0 && startDays <= 30 && d.group !== 'prime') {
+    if (startDays > 0 && startDays <= 30 && d.group !== 'prime' && d.group !== 'pbdd') {
       items.push({ days: startDays, html: `<div class="reminder-item"><div class="reminder-icon info">📅</div><div class="reminder-text"><div class="title">${d.name} 活動開始</div><div class="meta">${fmt(d.eventStart)}</div></div></div>` });
     }
   });
-  // FBA deadline
+  // FBA deadline — Prime Day
   const fbaDays = diffDays(PRIME_FBA_DEADLINE);
   if (fbaDays >= 0) {
     items.push({ days: fbaDays, html: `<div class="reminder-item"><div class="reminder-icon ${fbaDays <= 14 ? 'warn' : 'info'}">📦</div><div class="reminder-text"><div class="title">Prime Day FBA 入倉截止</div><div class="meta">${fmtShort(PRIME_FBA_DEADLINE)} — 剩餘 ${fbaDays} 天</div></div></div>` });
+  }
+  // FBA deadline — PBDD
+  const pbddFbaDays = diffDays(PBDD_FBA_DEADLINE);
+  if (pbddFbaDays >= 0) {
+    items.push({ days: pbddFbaDays, html: `<div class="reminder-item"><div class="reminder-icon ${pbddFbaDays <= 14 ? 'warn' : 'info'}">📦</div><div class="reminder-text"><div class="title">Prime 感謝特賣 FBA 入倉截止</div><div class="meta">${fmtShort(PBDD_FBA_DEADLINE)} — 剩餘 ${pbddFbaDays} 天</div></div></div>` });
   }
   // Early bird
   const earlyDays = diffDays('2026-04-30T23:59');
