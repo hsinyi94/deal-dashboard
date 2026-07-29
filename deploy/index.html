@@ -717,9 +717,9 @@ function renderCalendar() {
   const calEvents = [];
   deals.forEach(d => {
     const es = p(d.eventStart), ee = p(d.eventEnd);
-    calEvents.push({ start: es, end: ee, type: 'event' });
+    if (!d.pendingRegistration) calEvents.push({ start: es, end: ee, type: 'event' });
     d.deadlines.forEach(dl => {
-      if (!d.deadlineText) calEvents.push({ start: p(dl.date), end: p(dl.date), type: 'deadline' });
+      if (!d.deadlineText && !d.pendingRegistration) calEvents.push({ start: p(dl.date), end: p(dl.date), type: 'deadline' });
     });
   });
 
