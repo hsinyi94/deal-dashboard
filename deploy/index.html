@@ -599,12 +599,17 @@ function renderTables() {
   document.getElementById('upcomingBody').innerHTML = upcomingHtml;
 
   // Ended tab
-  const endedNonPrime = endedDeals.filter(d => d.group !== 'prime');
+  const endedNonGrouped = endedDeals.filter(d => !d.group);
   const endedPrime = endedDeals.filter(d => d.group === 'prime');
-  let endedHtml = endedNonPrime.map(d => renderRow(d, false)).join('');
+  const endedPbdd = endedDeals.filter(d => d.group === 'pbdd');
+  let endedHtml = endedNonGrouped.map(d => renderRow(d, false)).join('');
   if (endedPrime.length > 0) {
     endedHtml += `<tr class="section-row"><td colspan="5">🏆 Prime 會員日</td></tr>`;
     endedHtml += endedPrime.map(d => renderRow(d, false)).join('');
+  }
+  if (endedPbdd.length > 0) {
+    endedHtml += `<tr class="section-row"><td colspan="5">🎁 Prime 感謝特賣 PBDD</td></tr>`;
+    endedHtml += endedPbdd.map(d => renderRow(d, false)).join('');
   }
   if (endedDeals.length === 0) {
     endedHtml = '<tr><td colspan="5" style="text-align:center;padding:40px;color:#9CA3AF;">目前沒有已結束的活動</td></tr>';
