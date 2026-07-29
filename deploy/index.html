@@ -662,6 +662,7 @@ function renderReminders() {
   const items = [];
   deals.forEach(d => {
     if (isEnded(d)) return;
+    if (d.pendingRegistration) return; // skip pending items — deadline not yet officially announced
     d.deadlines.forEach(dl => {
       if (d.deadlineText) return; // skip "活動期間內" type
       const days = diffDays(dl.date);
