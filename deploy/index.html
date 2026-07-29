@@ -387,10 +387,75 @@ const deals = [
     link: 'https://sellercentral.amazon.co.jp/ap/signin?clientContext=358-4993678-4963308&openid.pape.max_auth_age=300&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&language=ja_JP&pageId=sc_amazon_v3_unified&openid.pape.preferred_auth_policies=Policy15&openid.return_to=https%3A%2F%2Fsellercentral.amazon.co.jp%2Fcoupons%2Fcoupons-dashboard-page&openid.assoc_handle=sc_jp_amazon_v2&openid.mode=checkid_setup&intercept=false&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0',
     linkLabel: '賣家平台',
     group: 'prime'
+  },
+  // Prime Appreciation Sale (PBDD) — 2026
+  {
+    id: 'pbdd-pe-bd',
+    name: 'Prime 會員專享 Z 划算（PE-BD）',
+    sub: 'Prime 感謝特賣｜秒殺頁面版位',
+    type: 'prime', typeLabel: 'PE-BD',
+    eventStart: '2026-10-19T00:00', eventEnd: '2026-10-25T23:59',
+    eventText: '2026 年 10 月<br>詳細日期待官方公告',
+    deadlines: [{ label: '', date: '2026-10-11T23:59' }],
+    link: 'https://sellercentral-japan.amazon.com/merchandising-new/landing',
+    linkLabel: '賣家平台',
+    group: 'pbdd'
+  },
+  {
+    id: 'pbdd-ped',
+    name: 'Prime 會員專享折扣（PED）',
+    sub: 'Prime 感謝特賣｜商品頁 Prime 專享價',
+    type: 'prime', typeLabel: 'PED',
+    eventStart: '2026-10-19T00:00', eventEnd: '2026-10-25T23:59',
+    eventText: '2026 年 10 月<br>詳細日期待官方公告',
+    deadlines: [{ label: '', date: '2026-10-19T23:59' }],
+    link: 'https://sellercentral-japan.amazon.com/discounts/',
+    linkLabel: '賣家平台',
+    group: 'pbdd'
+  },
+  {
+    id: 'pbdd-manual-bd',
+    name: 'Prime 感謝特賣 — Manual BD',
+    sub: '手動秒殺｜提報路徑待官方公告',
+    type: 'manual-bd', typeLabel: 'Manual BD',
+    eventStart: '2026-10-19T00:00', eventEnd: '2026-10-25T23:59',
+    eventText: '2026 年 10 月<br>詳細日期待官方公告',
+    deadlines: [{ label: '', date: '2026-10-19T23:59' }],
+    pendingRegistration: true,
+    link: '#',
+    linkLabel: '待更新',
+    group: 'pbdd'
+  },
+  {
+    id: 'pbdd-coupon',
+    name: 'Prime 感謝特賣 — 優惠券（Coupon）',
+    sub: '綠色徽章曝光｜提報路徑待官方公告',
+    type: 'coupon', typeLabel: '優惠券',
+    eventStart: '2026-10-19T00:00', eventEnd: '2026-10-25T23:59',
+    eventText: '2026 年 10 月<br>詳細日期待官方公告',
+    deadlines: [{ label: '', date: '2026-10-19T23:59' }],
+    pendingRegistration: true,
+    link: 'https://sellercentral-japan.amazon.com/coupons/coupons-dashboard-page',
+    linkLabel: '待更新',
+    group: 'pbdd'
+  },
+  {
+    id: 'pbdd-points-deal',
+    name: 'Prime 感謝特賣 — Points DEAL',
+    sub: '積分加碼活動｜提報路徑待官方公告',
+    type: 'points', typeLabel: '積分',
+    eventStart: '2026-10-19T00:00', eventEnd: '2026-10-25T23:59',
+    eventText: '2026 年 10 月<br>詳細日期待官方公告',
+    deadlines: [{ label: '', date: '2026-10-19T23:59' }],
+    pendingRegistration: true,
+    link: '#',
+    linkLabel: '待更新',
+    group: 'pbdd'
   }
 ];
 
 const PRIME_FBA_DEADLINE = '2026-06-29';
+const PBDD_FBA_DEADLINE = '2026-10-09';
 
 // ============ HELPERS ============
 function p(d) { return new Date(d); }
