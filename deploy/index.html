@@ -530,9 +530,10 @@ function diffDays(d) { return Math.ceil((p(d) - NOW) / 86400000); }
 
 function getStatus(deal) {
   const es = p(deal.eventStart), ee = p(deal.eventEnd);
-  const lastDeadline = p(deal.deadlines[deal.deadlines.length - 1].date);
   if (NOW > ee) return 'ended';
   if (NOW >= es && NOW <= ee) return 'active';
+  if (deal.alwaysOpenRegistration) return 'open';
+  const lastDeadline = p(deal.deadlines[deal.deadlines.length - 1].date);
   if (deal.pendingRegistration) return 'pending';
   if (NOW <= lastDeadline) return 'open';
   if (NOW > lastDeadline && NOW < es) return 'upcoming';
