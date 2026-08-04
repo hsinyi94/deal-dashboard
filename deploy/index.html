@@ -541,6 +541,7 @@ function getStatus(deal) {
 }
 
 function allDeadlinesPassed(deal) {
+  if (deal.alwaysOpenRegistration) return false;
   return deal.deadlines.every(dl => NOW > p(dl.date));
 }
 
