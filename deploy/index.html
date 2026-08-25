@@ -473,14 +473,19 @@ const deals = [
   {
     id: 'pbdd-manual-bd',
     name: 'Prime 感謝特賣 — Manual BD',
-    sub: '手動秒殺｜提報路徑待官方公告',
+    sub: '三輪報名｜¥600 / Deal + 銷售額 1.0%（上限 ¥20,000）｜至少 1% 積分',
     type: 'manual-bd', typeLabel: 'Manual BD',
     eventStart: '2026-10-19T00:00', eventEnd: '2026-10-25T23:59',
     eventText: '2026 年 10 月<br>詳細日期待官方公告',
-    deadlines: [{ label: '', date: '2026-10-19T23:59' }],
-    pendingRegistration: true,
-    link: '#',
-    linkLabel: '待更新',
+    deadlines: [
+      { label: '第一輪', date: '2026-08-31T23:59' },
+      { label: '第二輪', date: '2026-09-07T23:59' },
+      { label: '第三輪', date: '2026-09-14T23:59' }
+    ],
+    deadlineText: '第一輪：2026/8/31<br>第二輪：2026/9/7<br>第三輪：2026/9/14<br><span style="font-size:11px;color:#6B7280;">原公告未載明截止時間</span>',
+    earlyBird: '💡 第一輪提交整檔最多收取 6 個 Deal 費用；第二輪起最多 10 個',
+    link: 'https://suv.ma.globalsellingcommunity.cn/t/5RR5fa',
+    linkLabel: '立即提報',
     group: 'pbdd'
   },
   {
