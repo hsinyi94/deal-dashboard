@@ -18,6 +18,7 @@
     'sl-mde5-september-dotd': { name: 'ファッションカテゴリー MDE#5＋9月 DOTD', sub: 'Fashion ASIN 限定｜FDE#7、MDE#5、FBS#7、FDE#8', eventText: 'FDE#7：8/21 09:00～8/27 23:59<br>MDE#5：8/28 00:00～9/3 23:59<br>FBS#7：9/5 09:00～9/14 23:59<br>FDE#8：9/18 09:00～9/28 23:59', deadlines: ['申請期限'], linkLabel: 'DOTD に申請', earlyBird: '💡 FDE#7 は MDE#5 との連続実施のみ対応｜MDE ASIN は1%以上のポイント設定が必要' },
     hde4: { name: '生活応援 夏祭り Sale（HDE#4）— Manual BD', sub: '2回募集｜Manual BD｜Hardline カテゴリー特設ページ', deadlines: ['第1回', '第2回'], linkLabel: '今すぐ申請', earlyBird: '💡 第1回はプロモーション料金が最大6件分｜第2回以降は最大10件分' },
     mde5: { name: '第5回 Amazon スマイルSALE（MDE#5）— Manual BD', sub: '2回募集｜Manual BD', deadlines: ['第1回', '第2回'], linkLabel: '今すぐ申請', earlyBird: '💡 第1回はプロモーション料金が最大6件分｜第2回以降は最大10件分' },
+    mde6: { name: '第6回 Amazon スマイルSALE（MDE#6）— Manual BD', sub: '2回募集｜¥150 / 日 / Deal＋売上の1.0%（上限 ¥15,000）｜1%以上のポイント設定が必要', deadlines: ['第1回', '第2回'], linkLabel: '今すぐ申請', earlyBird: '💡 第1回はキャンペーン全体でプロモーション料金が最大6件分、第2回以降は最大10件分｜本セールの価格が Black Friday の30日間最低価格の基準になります' },
     'b2b-brand-standard-2026': { name: '2026 Amazon.co.jp 法人向けブランド特集（通常枠）', sub: '申請不要｜5%以上の法人価格割引を設定すると自動掲載', typeLabel: 'B2B', deadlines: ['キャンペーン期間中'], deadlineText: 'キャンペーン期間中', linkLabel: '設定ガイド', earlyBird: '💡 通常枠は毎日更新されます。早めに設定して露出機会を増やしましょう' },
     'prime-manual-bd': { name: 'プライムデー — Manual BD', sub: '3回募集｜前払費用 ¥600＋売上の1.0%｜1%以上のポイント設定が必要', deadlines: ['第1回', '第2回', '第3回'], linkLabel: '今すぐ申請', earlyBird: '💡 第1回に申請すると、プロモーション料金は最大6件分（大幅節約）' },
     'prime-bd': { name: 'プライム会員限定 Zお買い得', sub: 'PE-BD｜前払費用 ¥600＋売上の1.0%', linkLabel: 'セラーセントラル' },

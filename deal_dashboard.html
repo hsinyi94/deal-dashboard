@@ -49,6 +49,7 @@
   .badge.upcoming { background:#FEF3C7; color:#92400E; }
   .badge.active { background:#DBEAFE; color:#1E40AF; }
   .badge.ended { background:#F3F4F6; color:#6B7280; }
+  .badge.pending { background:#E5E7EB; color:#4B5563; }
   .type-badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:700; white-space:nowrap; }
   .type-badge.points { background:#EDE9FE; color:#5B21B6; }
   .type-badge.manual-bd { background:#FFF7ED; color:#C2410C; }
@@ -268,6 +269,71 @@ const deals = [
     group: null
   },
   {
+    id: 'points-festival-7',
+    name: '積分狂歡節 #7（夏季）— Points DEAL',
+    sub: '賣家平台自助提報｜免費｜100% BO 需設定積分',
+    type: 'points', typeLabel: '積分',
+    eventStart: '2026-07-21T00:00', eventEnd: '2026-07-28T23:59',
+    deadlines: [{ label: '積分設定截止', date: '2026-07-17T23:59' }],
+    link: 'https://sellercentral-japan.amazon.com/gc/3p-points/points-deal-cn',
+    linkLabel: '賣家平台提報',
+    earlyBird: '💡 Qualtrics 已於 7/13 截止，仍可透過賣家平台追加提交（無法修改/取消）',
+    group: null
+  },  {
+    id: 'hde3',
+    name: '夏日 Sale（HDE#3）— Manual BD',
+    sub: '單輪報名｜生活應援夏日 Sale + 夏日禮品 Sale｜需設定至少 1% 積分',
+    type: 'manual-bd', typeLabel: 'Manual BD',
+    eventStart: '2026-07-29T00:00', eventEnd: '2026-08-06T23:59',
+    deadlines: [{ label: '報名截止', date: '2026-07-19T18:00' }],
+    link: 'https://suv.ma.globalsellingcommunity.cn/t/5RRAuC',
+    linkLabel: '立即提報',
+    earlyBird: '💡 整個活動最多收 5 個促銷費用｜積分設定截止 7/23',
+    group: null
+  },
+  {
+    id: 'points-festival-8',
+    name: '積分狂歡節 #8（盛夏）— Points DEAL',
+    sub: '積分中心自助提報｜免費｜雙倍積分 8/8～8/9、8/15～8/16',
+    type: 'points', typeLabel: '積分',
+    eventStart: '2026-08-08T09:00', eventEnd: '2026-08-20T23:59',
+    deadlines: [],
+    alwaysOpenRegistration: true,
+    deadlineText: '邀請郵件：7/29 截止（未載時間）<br>積分中心可隨時提報',
+    link: 'https://sellercentral.amazon.co.jp/points-central/promotions',
+    linkLabel: '積分中心提報',
+    earlyBird: '💡 建議積分率 10% 以上｜邀請連結提交後無法修改或取消',
+    group: null
+  },
+  {
+    id: 'sl-mde5-september-dotd',
+    name: '時尚品類 MDE#5＋9 月 DOTD',
+    sub: '僅限 Fashion ASIN｜FDE#7、MDE#5、FBS#7、FDE#8',
+    type: 'manual-bd', typeLabel: 'Fashion DOTD',
+    eventStart: '2026-08-21T09:00', eventEnd: '2026-09-28T23:59',
+    eventText: 'FDE#7：8/21 09:00～8/27 23:59<br>MDE#5：8/28 00:00～9/3 23:59<br>FBS#7：9/5 09:00～9/14 23:59<br>FDE#8：9/18 09:00～9/28 23:59',
+    deadlines: [{ label: '提報截止', date: '2026-08-14T17:00' }],
+    link: 'https://amazon-sale-event.com/seller/sales/view/106',
+    linkLabel: 'DOTD 提報',
+    earlyBird: '💡 FDE#7 僅支援與 MDE#5 連跑｜MDE ASIN 須設定至少 1% 積分',
+    group: null
+  },
+  {
+    id: 'mde6',
+    name: '第 6 次 Amazon 月促（MDE#6）— Manual BD',
+    sub: '兩輪報名｜¥150 / 天 / Deal + 銷售額 1.0%（上限 ¥15,000）｜至少 1% 積分',
+    type: 'manual-bd', typeLabel: 'Manual BD',
+    eventStart: '2026-11-04T00:00', eventEnd: '2026-11-12T23:59',
+    deadlines: [
+      { label: '第一輪', date: '2026-09-20T18:00' },
+      { label: '第二輪', date: '2026-09-24T18:00' }
+    ],
+    link: 'https://suv.ma.globalsellingcommunity.cn/t/5RRarh',
+    linkLabel: '立即提報',
+    earlyBird: '💡 第一輪提交整檔最多收 6 個 Deal 費用；第二輪起最多 10 個｜本檔價格將成為 Black Friday 30 天最低價基準',
+    group: null
+  },
+  {
     id: 'b2b-brand-standard-2026',
     name: '2026 日亞企業購品牌專場（普通展位）',
     sub: '無須提報｜後台設定 ≥5% 企業折扣自動抓取',
@@ -286,8 +352,7 @@ const deals = [
     name: 'Prime 會員日 — Manual BD',
     sub: '三輪報名｜預付費 ¥600 + 銷售額 1.0%｜需設定至少 1% 積分',
     type: 'manual-bd', typeLabel: 'Manual BD',
-    eventStart: '2026-07-01T00:00', eventEnd: '2026-07-31T23:59',
-    eventText: '待定',
+    eventStart: '2026-07-07T00:00', eventEnd: '2026-07-13T23:59',
     deadlines: [
       { label: '第一輪', date: '2026-05-23T18:00' },
       { label: '第二輪', date: '2026-05-30T18:00' },
@@ -303,8 +368,7 @@ const deals = [
     name: 'Prime 會員專享 Z 劃算',
     sub: 'PE-BD｜預付費 ¥600 + 銷售額 1.0%',
     type: 'prime', typeLabel: 'PE-BD',
-    eventStart: '2026-07-01T00:00', eventEnd: '2026-07-31T23:59',
-    eventText: '待定',
+    eventStart: '2026-07-07T00:00', eventEnd: '2026-07-13T23:59',
     deadlines: [{ label: '', date: '2026-07-05T23:59' }],
     link: 'https://sellercentral.amazon.co.jp/merchandising-new/landing',
     linkLabel: '賣家平台',
@@ -315,8 +379,7 @@ const deals = [
     name: 'Prime 會員專享秒殺',
     sub: 'PE-LD',
     type: 'prime', typeLabel: 'PE-LD',
-    eventStart: '2026-07-01T00:00', eventEnd: '2026-07-31T23:59',
-    eventText: '待定',
+    eventStart: '2026-07-07T00:00', eventEnd: '2026-07-13T23:59',
     deadlines: [{ label: '', date: '2026-07-05T23:59' }],
     link: 'https://sellercentral.amazon.co.jp/merchandising-new/landing',
     linkLabel: '賣家平台',
@@ -327,9 +390,8 @@ const deals = [
     name: 'Prime 會員專享折扣',
     sub: 'PED｜預付費 ¥600 + 銷售額 1.0%',
     type: 'prime', typeLabel: 'Prime Day',
-    eventStart: '2026-07-01T00:00', eventEnd: '2026-07-31T23:59',
-    eventText: '待定',
-    deadlines: [{ label: '活動前 12 小時', date: '2026-07-31T23:59' }],
+    eventStart: '2026-07-07T00:00', eventEnd: '2026-07-13T23:59',
+    deadlines: [{ label: '活動前 12 小時', date: '2026-07-06T12:00' }],
     deadlineText: '活動前 12 小時',
     link: 'https://sellercentral.amazon.co.jp/ap/signin?clientContext=358-4993678-4963308&openid.pape.max_auth_age=300&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&language=ja_JP&pageId=sc_amazon_v3_unified&openid.pape.preferred_auth_policies=Policy15&openid.return_to=https%3A%2F%2Fsellercentral.amazon.co.jp%2Fdiscounts%2F&openid.assoc_handle=sc_jp_amazon_v2&openid.mode=checkid_setup&intercept=false&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0',
     linkLabel: '賣家平台',
@@ -340,9 +402,8 @@ const deals = [
     name: '積分促銷（Points Deal）',
     sub: '免費｜推薦積分率 10%',
     type: 'points', typeLabel: '積分',
-    eventStart: '2026-07-01T00:00', eventEnd: '2026-07-31T23:59',
-    eventText: '待定',
-    deadlines: [{ label: '活動期間內', date: '2026-07-31T23:59' }],
+    eventStart: '2026-07-07T00:00', eventEnd: '2026-07-13T23:59',
+    deadlines: [{ label: '活動期間內', date: '2026-07-13T23:59' }],
     deadlineText: '活動期間內',
     link: 'https://sellercentral.amazon.co.jp/ap/signin?clientContext=358-4993678-4963308&openid.pape.max_auth_age=300&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&language=ja_JP&pageId=sc_amazon_v3_unified&openid.pape.preferred_auth_policies=Policy15&openid.return_to=https%3A%2F%2Fsellercentral.amazon.co.jp%2Fpoints-central%2Fpromotions&openid.assoc_handle=sc_jp_amazon_v2&openid.mode=checkid_setup&intercept=false&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0',
     linkLabel: '賣家平台',
@@ -353,17 +414,86 @@ const deals = [
     name: '優惠券',
     sub: '建立費 ¥150/張 + 兌換銷售額 1.5%',
     type: 'coupon', typeLabel: '優惠券',
-    eventStart: '2026-07-01T00:00', eventEnd: '2026-07-31T23:59',
-    eventText: '待定',
-    deadlines: [{ label: '活動期間內', date: '2026-07-31T23:59' }],
+    eventStart: '2026-07-07T00:00', eventEnd: '2026-07-13T23:59',
+    deadlines: [{ label: '活動期間內', date: '2026-07-13T23:59' }],
     deadlineText: '活動期間內',
     link: 'https://sellercentral.amazon.co.jp/ap/signin?clientContext=358-4993678-4963308&openid.pape.max_auth_age=300&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&language=ja_JP&pageId=sc_amazon_v3_unified&openid.pape.preferred_auth_policies=Policy15&openid.return_to=https%3A%2F%2Fsellercentral.amazon.co.jp%2Fcoupons%2Fcoupons-dashboard-page&openid.assoc_handle=sc_jp_amazon_v2&openid.mode=checkid_setup&intercept=false&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0',
     linkLabel: '賣家平台',
     group: 'prime'
+  },
+  // Prime Appreciation Sale (PBDD) — 2026
+  {
+    id: 'pbdd-pe-bd',
+    name: 'Prime 會員專享 Z 划算（PE-BD）',
+    sub: 'Prime 感謝特賣｜秒殺頁面版位',
+    type: 'prime', typeLabel: 'PE-BD',
+    eventStart: '2026-10-19T00:00', eventEnd: '2026-10-25T23:59',
+    eventText: '2026 年 10 月<br>詳細日期待官方公告',
+    deadlines: [{ label: '', date: '2026-10-11T23:59' }],
+    link: 'https://sellercentral-japan.amazon.com/merchandising-new/landing',
+    linkLabel: '賣家平台',
+    group: 'pbdd'
+  },
+  {
+    id: 'pbdd-ped',
+    name: 'Prime 會員專享折扣（PED）',
+    sub: 'Prime 感謝特賣｜商品頁 Prime 專享價',
+    type: 'prime', typeLabel: 'PED',
+    eventStart: '2026-10-19T00:00', eventEnd: '2026-10-25T23:59',
+    eventText: '2026 年 10 月<br>詳細日期待官方公告',
+    deadlines: [{ label: '', date: '2026-10-19T23:59' }],
+    link: 'https://sellercentral-japan.amazon.com/discounts/',
+    linkLabel: '賣家平台',
+    group: 'pbdd'
+  },
+  {
+    id: 'pbdd-manual-bd',
+    name: 'Prime 感謝特賣 — Manual BD',
+    sub: '三輪報名｜¥600 / Deal + 銷售額 1.0%（上限 ¥20,000）｜至少 1% 積分',
+    type: 'manual-bd', typeLabel: 'Manual BD',
+    eventStart: '2026-10-19T00:00', eventEnd: '2026-10-25T23:59',
+    eventText: '2026 年 10 月<br>詳細日期待官方公告',
+    deadlines: [
+      { label: '第一輪', date: '2026-08-31T23:59' },
+      { label: '第二輪', date: '2026-09-07T23:59' },
+      { label: '第三輪', date: '2026-09-14T23:59' }
+    ],
+    deadlineText: '第一輪：2026/8/31<br>第二輪：2026/9/7<br>第三輪：2026/9/14<br><span style="font-size:11px;color:#6B7280;">原公告未載明截止時間</span>',
+    earlyBird: '💡 第一輪提交整檔最多收取 6 個 Deal 費用；第二輪起最多 10 個',
+    link: 'https://suv.ma.globalsellingcommunity.cn/t/5RR5fa',
+    linkLabel: '立即提報',
+    group: 'pbdd'
+  },
+  {
+    id: 'pbdd-coupon',
+    name: 'Prime 感謝特賣 — 優惠券（Coupon）',
+    sub: '綠色徽章曝光｜提報路徑待官方公告',
+    type: 'coupon', typeLabel: '優惠券',
+    eventStart: '2026-10-19T00:00', eventEnd: '2026-10-25T23:59',
+    eventText: '2026 年 10 月<br>詳細日期待官方公告',
+    deadlines: [{ label: '', date: '2026-10-19T23:59' }],
+    pendingRelease: true,
+    link: 'https://sellercentral-japan.amazon.com/coupons/coupons-dashboard-page',
+    linkLabel: '待更新',
+    group: 'pbdd'
+  },
+  {
+    id: 'pbdd-points-deal',
+    name: 'Prime 感謝特賣 — Points DEAL',
+    sub: '積分加碼活動｜提報路徑待官方公告',
+    type: 'points', typeLabel: '積分',
+    eventStart: '2026-10-19T00:00', eventEnd: '2026-10-25T23:59',
+    eventText: '2026 年 10 月<br>詳細日期待官方公告',
+    deadlines: [{ label: '', date: '2026-10-19T23:59' }],
+    pendingRelease: true,
+    link: '#',
+    linkLabel: '待更新',
+    group: 'pbdd'
   }
 ];
 
 const PRIME_FBA_DEADLINE = '2026-06-29';
+const PBDD_FBA_DEADLINE = '2026-10-09';
 
 // ============ HELPERS ============
 function p(d) { return new Date(d); }
@@ -381,15 +511,17 @@ function diffDays(d) { return Math.ceil((p(d) - NOW) / 86400000); }
 
 function getStatus(deal) {
   const es = p(deal.eventStart), ee = p(deal.eventEnd);
-  const lastDeadline = p(deal.deadlines[deal.deadlines.length - 1].date);
   if (NOW > ee) return 'ended';
   if (NOW >= es && NOW <= ee) return 'active';
+  if (deal.alwaysOpenRegistration) return 'open';
+  const lastDeadline = p(deal.deadlines[deal.deadlines.length - 1].date);
   if (NOW <= lastDeadline) return 'open';
   if (NOW > lastDeadline && NOW < es) return 'upcoming';
   return 'upcoming';
 }
 
 function allDeadlinesPassed(deal) {
+  if (deal.alwaysOpenRegistration) return false;
   return deal.deadlines.every(dl => NOW > p(dl.date));
 }
 
@@ -406,7 +538,9 @@ function renderRow(deal, showCheck) {
   const checks = loadChecks();
 
   let deadlineHtml = '';
-  if (deal.deadlineText) {
+  if (deal.pendingRelease) {
+    deadlineHtml = '<span style="color:#6B7280;">待官方公告</span>';
+  } else if (deal.deadlineText) {
     deadlineHtml = deal.deadlineText;
   } else {
     deadlineHtml = deal.deadlines.map(dl => {
@@ -423,14 +557,20 @@ function renderRow(deal, showCheck) {
     active: '<span class="badge active">活動進行中</span>',
     upcoming: '<span class="badge upcoming">即將到來</span>',
     ended: '<span class="badge ended">已結束</span>',
-    closed: '<span class="badge closed">已截止</span>'
+    closed: '<span class="badge closed">已截止</span>',
+    pending: '<span class="badge pending">待發布</span>'
   };
   let statusHtml = statusMap[status] || '';
+  if (deal.pendingRelease && status !== 'ended' && status !== 'active') {
+    statusHtml = statusMap.pending;
+  }
   if (status === 'active' && deadlineClosed) statusHtml = statusMap.active;
 
   let linkHtml = '';
   if (status === 'ended') {
     linkHtml = '<span class="link-btn disabled">已結束</span>';
+  } else if (deal.pendingRelease) {
+    linkHtml = '<span class="link-btn disabled">待更新</span>';
   } else if (deadlineClosed) {
     linkHtml = '<span class="link-btn disabled">已截止</span>';
   } else {
@@ -460,26 +600,38 @@ function renderTables() {
   const activeDeals = deals.filter(d => !isEnded(d));
   const endedDeals = deals.filter(d => isEnded(d));
 
-  // Group active: non-prime first, then prime section
-  const nonPrime = activeDeals.filter(d => d.group !== 'prime');
+  // Group active: non-grouped first, then prime section, then pbdd section
+  const nonGrouped = activeDeals.filter(d => !d.group);
   const prime = activeDeals.filter(d => d.group === 'prime');
+  const pbdd = activeDeals.filter(d => d.group === 'pbdd');
 
-  let activeHtml = nonPrime.map(d => renderRow(d, true)).join('');
+  let activeHtml = nonGrouped.map(d => renderRow(d, true)).join('');
   if (prime.length > 0) {
     const fbaNote = diffDays(PRIME_FBA_DEADLINE) > 0
       ? `<span class="fba-note">📦 FBA 入倉截止：${fmtShort(PRIME_FBA_DEADLINE)}｜建議海運常規補貨、緊急用標準空運</span>` : '';
     activeHtml += `<tr class="section-row"><td colspan="7">🏆 2026 Prime 會員日（預計7月）${fbaNote}</td></tr>`;
     activeHtml += prime.map(d => renderRow(d, true)).join('');
   }
+  if (pbdd.length > 0) {
+    const pbddFbaNote = diffDays(PBDD_FBA_DEADLINE) > 0
+      ? `<span class="fba-note">📦 FBA 入倉截止：${fmtShort(PBDD_FBA_DEADLINE)}｜Prime 感謝特賣參加商品需送達 FBA</span>` : '';
+    activeHtml += `<tr class="section-row"><td colspan="7">🎁 2026 Prime 感謝特賣 PBDD（預計10月）${pbddFbaNote}</td></tr>`;
+    activeHtml += pbdd.map(d => renderRow(d, true)).join('');
+  }
   document.getElementById('activeBody').innerHTML = activeHtml;
 
   // Ended
-  const endedNonPrime = endedDeals.filter(d => d.group !== 'prime');
+  const endedNonGrouped = endedDeals.filter(d => !d.group);
   const endedPrime = endedDeals.filter(d => d.group === 'prime');
-  let endedHtml = endedNonPrime.map(d => renderRow(d, false)).join('');
+  const endedPbdd = endedDeals.filter(d => d.group === 'pbdd');
+  let endedHtml = endedNonGrouped.map(d => renderRow(d, false)).join('');
   if (endedPrime.length > 0) {
     endedHtml += `<tr class="section-row"><td colspan="5">🏆 Prime 會員日</td></tr>`;
     endedHtml += endedPrime.map(d => renderRow(d, false)).join('');
+  }
+  if (endedPbdd.length > 0) {
+    endedHtml += `<tr class="section-row"><td colspan="5">🎁 Prime 感謝特賣 PBDD</td></tr>`;
+    endedHtml += endedPbdd.map(d => renderRow(d, false)).join('');
   }
   if (endedDeals.length === 0) {
     endedHtml = '<tr><td colspan="5" style="text-align:center;padding:40px;color:#9CA3AF;">目前沒有已結束的活動</td></tr>';
@@ -493,6 +645,7 @@ function renderTables() {
   // Stats
   let cntActive = 0, cntOpen = 0, cntUpcoming = 0, cntEnded = endedDeals.length;
   activeDeals.forEach(d => {
+    if (d.pendingRelease) return; // pending items don't count as open/upcoming
     const s = getStatus(d);
     if (s === 'active') cntActive++;
     else if (s === 'open') cntOpen++;
@@ -532,6 +685,7 @@ function renderReminders() {
   const items = [];
   deals.forEach(d => {
     if (isEnded(d)) return;
+    if (d.pendingRelease) return; // skip pending release items — deadline not yet officially announced
     d.deadlines.forEach(dl => {
       if (d.deadlineText) return; // skip "活動期間內" type
       const days = diffDays(dl.date);
@@ -545,14 +699,19 @@ function renderReminders() {
     });
     // Event start reminder
     const startDays = diffDays(d.eventStart);
-    if (startDays > 0 && startDays <= 30 && d.group !== 'prime') {
+    if (startDays > 0 && startDays <= 30 && d.group !== 'prime' && d.group !== 'pbdd') {
       items.push({ days: startDays, html: `<div class="reminder-item"><div class="reminder-icon info">📅</div><div class="reminder-text"><div class="title">${d.name} 活動開始</div><div class="meta">${fmt(d.eventStart)}</div></div></div>` });
     }
   });
-  // FBA deadline
+  // FBA deadline — Prime Day
   const fbaDays = diffDays(PRIME_FBA_DEADLINE);
   if (fbaDays >= 0) {
     items.push({ days: fbaDays, html: `<div class="reminder-item"><div class="reminder-icon ${fbaDays <= 14 ? 'warn' : 'info'}">📦</div><div class="reminder-text"><div class="title">Prime Day FBA 入倉截止</div><div class="meta">${fmtShort(PRIME_FBA_DEADLINE)} — 剩餘 ${fbaDays} 天</div></div></div>` });
+  }
+  // FBA deadline — PBDD
+  const pbddFbaDays = diffDays(PBDD_FBA_DEADLINE);
+  if (pbddFbaDays >= 0) {
+    items.push({ days: pbddFbaDays, html: `<div class="reminder-item"><div class="reminder-icon ${pbddFbaDays <= 14 ? 'warn' : 'info'}">📦</div><div class="reminder-text"><div class="title">Prime 感謝特賣 FBA 入倉截止</div><div class="meta">${fmtShort(PBDD_FBA_DEADLINE)} — 剩餘 ${pbddFbaDays} 天</div></div></div>` });
   }
   // Early bird
   const earlyDays = diffDays('2026-04-30T23:59');
@@ -581,9 +740,9 @@ function renderCalendar() {
   const calEvents = [];
   deals.forEach(d => {
     const es = p(d.eventStart), ee = p(d.eventEnd);
-    calEvents.push({ start: es, end: ee, type: 'event' });
+    if (!d.pendingRelease) calEvents.push({ start: es, end: ee, type: 'event' });
     d.deadlines.forEach(dl => {
-      if (!d.deadlineText) calEvents.push({ start: p(dl.date), end: p(dl.date), type: 'deadline' });
+      if (!d.deadlineText && !d.pendingRelease) calEvents.push({ start: p(dl.date), end: p(dl.date), type: 'deadline' });
     });
   });
 
@@ -633,5 +792,6 @@ renderTables();
 renderReminders();
 renderCalendar();
 </script>
+<script src="deploy/i18n.js"></script>
 </body>
 </html>
